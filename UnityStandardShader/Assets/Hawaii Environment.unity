@@ -500,7 +500,8 @@ AudioSource:
   m_GameObject: {fileID: 799199908}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8379282963386585137, guid: b5d47b81be373504d8dd8017ba085c53,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: b2a8b020776951d44be5cf4a8ee99812, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -587,6 +588,61 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &799199915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799199908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d4890026b81f44f89191413f6155be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  midBottomPic: {fileID: 2800000, guid: ef1f19485bc0973409e71a402f40af88, type: 3}
+--- !u!114 &799199916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799199908}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0cbecf914b6584bb11cc68108a76de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logoTexture: {fileID: 2800000, guid: 99b64291a38a0104295f66c20f6d7618, type: 3}
+  cornerDisplayLogo: 3
+  logoPixelOffset: {x: 0, y: 0}
+  logoPercentOffset: {x: 0, y: 0}
+--- !u!114 &799199917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799199908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4f752fe3bcd074aa5cb6841752c2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowGUI: 1
+  LockCursor: 0
+--- !u!114 &799199918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799199908}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1942a3e0b6e6a4d9e93661dd94804a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1286834334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: cf51a0e97254a304f935f12a5c0f48c5,
@@ -903,6 +959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSController
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -77.42381
@@ -947,5 +1007,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8200000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -661426835247900917, guid: b5d47b81be373504d8dd8017ba085c53,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
