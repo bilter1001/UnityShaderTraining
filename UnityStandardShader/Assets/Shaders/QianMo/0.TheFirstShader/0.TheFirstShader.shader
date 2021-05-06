@@ -1,37 +1,66 @@
-// Made with Amplify Shader Editor
-// Available at the Unity Asset Store - http://u3d.as/y3X 
-Shader "浅墨Shader编程/0.TheFirstShader"
+//-----------------------------------------------【Shader说明】----------------------------------------------
+//		Shader功能：   凹凸纹理显示+自选边缘颜色和强度
+//     使用语言：   Shaderlab
+//     开发所用IDE版本：Unity4.5 06f 、Monodevelop   
+//     2014年11月2日  Created by 浅墨    
+//     更多内容或交流请访问浅墨的博客：http://blog.csdn.net/poem_qianmo
+//---------------------------------------------------------------------------------------------------------------------
+ 
+ 
+Shader "浅墨Shader编程/0.TheFirstShader" 
 {
-	Properties
+	//-------------------------------【属性】-----------------------------------------
+	Properties 
 	{
-		[HideInInspector] __dirty( "", Int ) = 1
+		_MainTex ("【纹理】Texture", 2D) = "white" {}
+		_BumpMap ("【凹凸纹理】Bumpmap", 2D) = "bump" {}
+		_RimColor ("【边缘颜色】Rim Color", Color) = (0.17,0.36,0.81,0.0)
+		_RimPower ("【边缘颜色强度】Rim Power", Range(0.6,9.0)) = 1.0
 	}
-
-	SubShader
+ 
+	//----------------------------【开始一个子着色器】---------------------------
+	SubShader 
 	{
-		Tags{ "RenderType" = "Opaque"  "Queue" = "Geometry+0" }
-		Cull Back
+		//渲染类型为Opaque，不透明
+		Tags { "RenderType" = "Opaque" }
+ 
+		//-------------------开始CG着色器编程语言段-----------------
 		CGPROGRAM
-		#pragma target 3.0
-		#pragma surface surf Standard keepalpha addshadow fullforwardshadows 
-		struct Input
+ 
+		//使用兰伯特光照模式
+		#pragma surface surf Lambert
+		
+		//输入结构
+		struct Input 
 		{
-			half filler;
+			float2 uv_MainTex;//纹理贴图
+			float2 uv_BumpMap;//法线贴图
+			float3 viewDir;//观察方向
 		};
-
-		void surf( Input i , inout SurfaceOutputStandard o )
+ 
+		//变量声明
+		sampler2D _MainTex;//主纹理
+		sampler2D _BumpMap;//凹凸纹理
+		float4 _RimColor;//边缘颜色
+		float _RimPower;//边缘颜色强度
+ 
+		//表面着色函数的编写
+		void surf (Input IN, inout SurfaceOutput o)
 		{
-			o.Alpha = 1;
+			//表面反射颜色为纹理颜色
+			o.Albedo = tex2D (_MainTex, IN.uv_MainTex).rgb;
+			//表面法线为凹凸纹理的颜色
+			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+			//边缘颜色
+			half rim = 1.0 - saturate(dot (normalize(IN.viewDir), o.Normal));
+			//边缘颜色强度
+			o.Emission = _RimColor.rgb * pow (rim, _RimPower);
 		}
-
+ 
+		//-------------------结束CG着色器编程语言段------------------
 		ENDCG
-	}
+	} 
+ 
+	//“备胎”为普通漫反射
 	Fallback "Diffuse"
-	CustomEditor "ASEMaterialInspector"
 }
-/*ASEBEGIN
-Version=18800
-8;604;1358;466;1982.953;546.5916;2.99277;True;True
-Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;0,0;Float;False;True;-1;2;ASEMaterialInspector;0;0;Standard;浅墨Shader编程/0.TheFirstShader;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Opaque;0.5;True;True;0;False;Opaque;;Geometry;All;14;all;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;True;0;0;False;-1;0;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;False;0.1;False;-1;0;False;-1;False;16;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
-ASEEND*/
-//CHKSM=4776DE0B7E34C0B68E0E98EF634C5E3AAD1BEBF6

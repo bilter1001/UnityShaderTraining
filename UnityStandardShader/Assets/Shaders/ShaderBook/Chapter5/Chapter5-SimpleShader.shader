@@ -17,9 +17,16 @@ Shader "Unity Shaders Book/Chapter 5/Simple Shader"
                 // NORMAL语义告诉Unity，用模型空间的发现防线填充normal变量
                 float3 normal : NORMAL;
                 // TEXCOORD0 语义告诉Unity,用模型的第一套纹理坐标填充texcoord变量
-                flaot4 texcoord : TEXCOORD0;
-            }
+                float4 texcoord : TEXCOORD;
+            };
             
+            struct v2f
+            {
+                // SV_POSITION语义告诉Unity，pos包含了顶点在裁剪空间中额位置信息
+                float4 pos : SV_POSITION;
+                // COLOR0语义可以用于存储颜色信息。
+                fixed3 color : COLOR0;
+            };
 
             float4 vert (a2v v) : SV_POSITION
             {
